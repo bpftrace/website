@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'bpfrace',
+  title: 'bpftrace',
   tagline: 'Dynamic Tracing for the Linux Platform',
   favicon: 'img/bpftrace_Icon-Black-Yellow_BG.svg',
 
