@@ -1,41 +1,19 @@
 # Website
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This is the home of the [bpftrace](https://bpftrace.org) website. The site itself is built using [Docusaurus](https://docusaurus.io/) with the `main` branch hosting the content and the `gh-pages` branch hosting the actual static content that is served through the GitHub pages infrastructure.
 
-### Installation
+Steps to develop, test and deploy website changes:
 
-```
-$ yarn
-```
+- Clone the website repo:
+	- `git clone git@github.com:bpftrace/website.git`
 
-### Local Development
+- Setup node modules in repo (on first clone):
+	- `npm install`
 
-```
-$ yarn start
-```
+- Do your changes in your own branch.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+- Test your changes locally defaults to `localhost:3000`:
+	- `npm start`
 
-### Build
+- If everything is OK, push your branch, create a PR and merge to main.
 
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
