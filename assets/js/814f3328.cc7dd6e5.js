@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktest_website=self.webpackChunktest_website||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Snooping /dev/null","permalink":"/blog/snooping-dev-null","unlisted":false,"date":"2025-01-09T13:50:45.000Z"}]}')}}]);

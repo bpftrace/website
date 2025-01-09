@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktest_website=self.webpackChunktest_website||[]).push([[8121],{8070:t=>{t.exports=JSON.parse('{"tags":[{"label":"Scripting","permalink":"/blog/tags/Scripting","description":"Scripting tag description","count":1}]}')}}]);
