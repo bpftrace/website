@@ -1,6 +1,6 @@
 # The bpftrace One-Liner Tutorial
 
-This teaches you bpftrace for Linux in 12 easy lessons, where each lesson is a one-liner you can try running. This series of one-liners introduces concepts which are summarized as bullet points. For a full reference to bpftrace, see the [man page](/docs/manpage)
+This teaches you bpftrace for Linux in 12 easy lessons, where each lesson is a one-liner you can try running. This series of one-liners introduces concepts which are summarized as bullet points. For a full reference to bpftrace, see the [man page](https://docs.bpftrace.org/)
 
 Contributed by Brendan Gregg, Netflix (2018), based on his FreeBSD [DTrace Tutorial](https://wiki.freebsd.org/DTrace/Tutorial).
 
@@ -327,4 +327,4 @@ This uses kernel dynamic tracing of the vfs_open() function, which has a (struct
 
 The kernel struct support is the same as bcc, making use of kernel headers. This means that many structs are available, but not everything, and sometimes it might be necessary to manually include a struct. For an example of this, see the [dcsnoop tool](https://github.com/bpftrace/bpftrace/tree/master/tools/dcsnoop.bt), which includes a portion of struct nameidata manually as it wasn't in the available headers. If the kernel has BTF data, all kernel structs are always available.
 
-At this point you understand much of bpftrace, and can begin to use and write powerful one-liners. See the [Manual](/docs/manpage) for more capabilities.
+At this point you understand much of bpftrace, and can begin to use and write powerful one-liners. See the [Manual](https://docs.bpftrace.org/) for more capabilities.

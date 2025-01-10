@@ -40,13 +40,7 @@ const config = {
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/bpftrace/bpftrace/',
-        },
+        docs: false,
         blog: {
           showReadingTime: true,
           feedOptions: {
@@ -80,11 +74,10 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
+            to: 'https://docs.bpftrace.org/',
             label: 'Docs',
-            to: '/docs/manpage.md',
+            target: '_self', // open external link in current window
+            position: 'left',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -106,8 +99,9 @@ const config = {
             title: 'Docs + Tutorials',
             items: [
               {
-                label: 'Manual page',
-                to: '/docs/manpage',
+                label: 'Documentation',
+                to: 'https://docs.bpftrace.org/',
+                target: '_self',
               },
               {
                 label: 'One-Liner Introduction Tutorial',
