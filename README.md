@@ -1,6 +1,6 @@
 # Website
 
-This is the home of the [bpftrace](https://bpftrace.org) website. The site itself is built using [Docusaurus](https://docusaurus.io/) with the `main` branch hosting the content and the `gh-pages` branch hosting the actual static content that is served through the GitHub pages infrastructure.
+This is the home of the [bpftrace](https://bpftrace.org) website. The site itself is built using [Docusaurus](https://docusaurus.io/) with the `master` branch hosting the content and the `gh-pages` branch hosting the actual static content that is served through the GitHub pages infrastructure.
 
 Steps to develop, test and deploy website changes:
 
@@ -15,5 +15,5 @@ Steps to develop, test and deploy website changes:
 - Test your changes locally defaults to `localhost:3000`:
 	- `npm start`
 
-- If everything is OK, push your branch, create a PR and merge to main.
+- If everything is OK, push your branch, create a PR and merge to master.
 
