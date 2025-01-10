@@ -74,7 +74,7 @@ const config = {
         },
         items: [
           {
-            to: 'https://docs.bpftrace.org/0.22',
+            to: 'https://docs.bpftrace.org/latest',
             label: 'Docs',
             target: '_self', // open external link in current window
             position: 'left',
@@ -100,7 +100,7 @@ const config = {
             items: [
               {
                 label: 'Documentation',
-                to: 'https://docs.bpftrace.org/0.22',
+                to: 'https://docs.bpftrace.org/latest',
                 target: '_self',
               },
               {
