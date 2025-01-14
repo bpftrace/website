@@ -14,15 +14,25 @@ function HomepageHeader() {
     return (
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <Link to="https://docs.bpftrace.org/latest" target="_self">
-          <img
-            className={styles.heroImage}
-            src={useBaseUrl('img/bpftrace_Full_Logo-Black.svg')}
-            alt="bpftrace docs"
-          />
-          </Link>
+        <div class="row">
+          <div class="col col--6">
+            <img
+                className={styles.heroImage}
+                src={useBaseUrl('img/bpftrace_Full_Logo-Black.svg')}
+                alt="bpftrace docs"
+              />
+            <p className="hero__subtitle">{siteConfig.tagline}</p>
+            <p>bpftrace uses LLVM as a backend to compile scripts to <Link to="https://ebpf.io/what-is-ebpf/" target="_self">eBPF</Link>-bytecode and makes use of <Link to="https://github.com/libbpf/libbpf" target="_self">libbpf</Link> and <Link to="https://github.com/iovisor/bcc" target="_self">bcc</Link> for interacting with the Linux BPF subsystem, as well as existing Linux tracing capabilities: kernel dynamic tracing (kprobes), user-level dynamic tracing (uprobes), tracepoints, etc. The bpftrace language is inspired by awk, C, and predecessor tracers such as DTrace and SystemTap. <br />bpftrace was created by Alastair Robertson.</p>
+          </div>
+          <div class="col col--6">
+            <div class="col-demo hero--video">
+            <video width="600" autoplay controls>
+              <source src="img/bpftrace-homepage.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+            </div>
+          </div>
+        </div>
         </div>
       </header>
     );

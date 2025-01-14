@@ -64,15 +64,18 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/bpftrace_Full_Logo-Black-Yellow_BG.svg',
       navbar: {
-        title: 'bpftrace',
         logo: {
           alt: 'bpftrace Logo',
          // replace with bpftrace svg 
-          src: 'img/bpftrace_Icon-Black-Yellow_BG.svg',
+          src: 'img/bpftrace_Full_Logo-Black.svg',
         },
         items: [
+          {
+            to: '/learn',
+            label: 'Learn',
+            position: 'left',
+          },
           {
             to: 'https://docs.bpftrace.org/latest',
             label: 'Docs',
@@ -82,7 +85,7 @@ const config = {
           {to: '/blog', label: 'Blog', position: 'left'},
           {
               href: 'https://github.com/bpftrace/bpftrace/discussions',
-              label: 'Community Discussions',
+              label: 'Discussions',
               position: 'left',
           },
           {
@@ -141,6 +144,10 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+      },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: true,
       },
     }),
 };
