@@ -35,7 +35,7 @@ jobs:
           git remote add pr ../
           git fetch pr
           git reset --hard pr/current
-          git cherry-pick origin/staging-config
+          git cherry-pick origin/staging-config_DO_NOT_DELETE
           git push -f
       - name: Message success
         if: ${{ success() }}
