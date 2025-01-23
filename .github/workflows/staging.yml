@@ -5,7 +5,7 @@ on:
 jobs:
   staging:
     runs-on: ubuntu-latest
-    if: ${{ fromJSON('["ajor", "danobi", "fbs", "jordalgo", "tyroguru", "viktormalik"]').includes(github.actor) && github.event.issue.pull_request && github.event.comment.body == '/stage' }}
+    if: ${{ contains(fromJSON('["ajor", "danobi", "fbs", "jordalgo", "tyroguru", "viktormalik"]'), github.actor) && github.event.issue.pull_request && github.event.comment.body == '/stage' }}
     steps:
       - name: Get Pull Request Hash
         id: sha
