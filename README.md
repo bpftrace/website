@@ -45,4 +45,11 @@ command above then add the version to make-doc command above e.g.
 
 ```bash
 $ ./make-doc.js PATH/TO/adoc.html 0.22
-``` 
+```
+
+If updating the docs for the latest released version of bpftrace, in addition to
+generating docs for the numbered version as above, you'll need to run the
+command for a second time with the version name "latest":
+```bash
+$ ./make-doc.js PATH/TO/adoc.html latest
+```

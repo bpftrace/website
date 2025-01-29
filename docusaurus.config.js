@@ -8,8 +8,6 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-const latestDocs = "/docs/0.22"
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'bpftrace',
@@ -61,18 +59,15 @@ const config = {
       }),
     ],
   ],
+
   plugins: [
     [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
           {
-            to: latestDocs,
             from: '/docs',
-          },
-          {
-            to: latestDocs,
-            from: '/docs/latest',
+            to: '/docs/latest',
           },
         ],
       },
@@ -99,13 +94,18 @@ const config = {
             type: 'dropdown',
             label: 'Docs',
             position: 'left',
+            to: '/docs/latest',
             items: [
               {
                 label: 'pre-release',
                 to: '/docs/pre-release'
               },
               {
-                label: '0.22 (latest)',
+                label: 'latest (0.22)',
+                to: '/docs/latest'
+              },
+              {
+                label: '0.22',
                 to: '/docs/0.22'
               },
               {
@@ -135,8 +135,7 @@ const config = {
             items: [
               {
                 label: 'Documentation',
-                to: latestDocs,
-                target: '_self',
+                to: '/docs/latest',
               },
               {
                 label: 'One-Liner Introduction Tutorial',
