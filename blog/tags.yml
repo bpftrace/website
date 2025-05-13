@@ -12,3 +12,8 @@ scripting:
   label: Scripting
   permalink: /Scripting
   description: Scripting tag description
+
+new_features:
+  label: New Features
+  permalink: /features
+  description: New Features tag description
