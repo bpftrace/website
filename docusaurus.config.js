@@ -114,10 +114,6 @@ const config = {
                 label: 'How to Contribute',
                 href: 'https://github.com/bpftrace/bpftrace/blob/master/CONTRIBUTING.md',
               },
-              {
-                href: 'https://github.com/bpftrace/bpftrace/discussions',
-                label: 'Discussions',
-            },
             ],
           },
           {
@@ -171,6 +167,25 @@ const config = {
               },
             ],
           },
+          {
+            type: 'dropdown',
+            label: 'Community',
+            position: 'left',
+            items: [
+              {
+                label: 'Discussion Forum',
+                href: 'https://github.com/bpftrace/bpftrace/discussions',
+              },
+              {
+                label: 'IRC',
+                href: 'https://webchat.oftc.net/?nick=&channels=%23bpftrace',
+              },
+              {
+                label: 'Office Hours',
+                to: 'office-hours'
+              },
+            ],
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/bpftrace/bpftrace',
@@ -201,10 +216,6 @@ const config = {
               {
                 label: 'IRC',
                 href: 'https://webchat.oftc.net/?nick=&channels=%23bpftrace',
-              },
-              {
-                label: 'Videos',
-                href: '/videos',
               },
             ],
           },
