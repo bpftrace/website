@@ -23,11 +23,14 @@ danobi:
   page: true
 
 ajor:
-  name: Alastair robertson
-  title: Software Engineer
-  url: https://github.com/ajor
+  name: Alastair Robertson
+  title: Bpftrace Creator and Maintainer
+  url: https://ajor.co.uk
   image_url: https://github.com/ajor.png
   page: true
+  socials:
+    github: ajor
+    linkedin: alastair-robertson
 
 viktormalik:
   name: Viktor Malik
