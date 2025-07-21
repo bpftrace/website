@@ -1,10 +1,5 @@
 # bpftrace Standard Library (Version: 0.23)
 
-- [Builtins](#builtins)
-- [Functions](#functions)
-- [Map Functions](#map-functions)
-- [Invocation Mode](#invocation-mode)
-
 ## Builtins
 
 Builtins are special variables built into the language.
@@ -13,7 +8,7 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 
 | Variable | Type | BPF Helper | Description |
 | --- | --- | --- | --- |
-| [`$1`, `$2`, `...$n`](./language#positional-parameters) | int64 | n/a | The nth positional parameter passed to the bpftrace program. If less than n parameters are passed this evaluates to `0` in an action block or an empty string in a probe. For string arguments in an action block use the `str()` call to retrieve the value. |
+| [`$1`, `$2`, `...$n`](language#positional-parameters) | int64 | n/a | The nth positional parameter passed to the bpftrace program. If less than n parameters are passed this evaluates to `0` in an action block or an empty string in a probe. For string arguments in an action block use the `str()` call to retrieve the value. |
 | `$#` | int64 | n/a | Total amount of positional parameters passed. |
 | `arg0`, `arg1`, `...argn` | int64 | n/a | nth argument passed to the function being traced. These are extracted from the CPU registers. The amount of args passed in registers depends on the CPU architecture. (kprobes, uprobes, usdt). |
 | `args` | struct args | n/a | The struct of all arguments of the traced function. Available in `rawtracepoint`, `tracepoint`, `fentry`, `fexit`, and `uprobe` (with DWARF) probes. Use `args.x` to access argument `x` or `args` to get a record with all arguments. |
@@ -888,7 +883,7 @@ Prints:
 The maximum string length is limited by the `BPFTRACE_MAX_STRLEN` env variable, unless `length` is specified and shorter than the maximum.
 In case the string is longer than the specified length only `length - 1` bytes are copied and a NULL byte is appended at the end.
 
-When available (starting from kernel 5.5, see the `--info` flag) bpftrace will automatically use the `kernel` or `user` variant of `probe_read_{kernel,user}_str` based on the address space of `data`, see [Address-spaces](./language#address-spaces) for more information.
+When available (starting from kernel 5.5, see the `--info` flag) bpftrace will automatically use the `kernel` or `user` variant of `probe_read_{kernel,user}_str` based on the address space of `data`, see [Address-spaces](language#address-spaces) for more information.
 
 ### strcontains
 
@@ -1188,7 +1183,7 @@ The data type associated with these functions are only for internal use and are 
 
 Functions that are marked **async** are asynchronous which can lead to unexpected behavior, see the [Invocation Mode](#invocation-mode) section for more information.
 
-More information on [map printing](./language#map-printing).
+More information on [map printing](language#map-printing).
 
 | Name | Description | Sync/async |
 | --- | --- | --- |

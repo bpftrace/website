@@ -150,19 +150,27 @@ const config = {
             to: '/docs/release_023/docs',
             items: [
               {
-                label: 'pre-release',
+                label: 'The Language',
+                to: '/docs/release_023/language'
+              },
+              {
+                label: 'The Standard Library',
+                to: '/docs/release_023/stdlib'
+              },
+              {
+                label: 'The Command Line Tool',
+                to: '/docs/release_023/cli'
+              },
+               {
+                label: 'Pre-release docs',
                 to: '/docs/pre-release/docs'
               },
               {
-                label: '0.23 (latest)',
-                to: '/docs/release_023/docs'
-              },
-              {
-                label: '0.22',
+                label: '0.22 docs',
                 to: '/docs/0.22'
               },
               {
-                label: '0.21',
+                label: '0.21 docs',
                 to: '/docs/0.21'
               },
             ],

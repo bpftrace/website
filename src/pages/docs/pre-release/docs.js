@@ -16,8 +16,8 @@ function DocsBody() {
     const [url, setUrl] = useState('https://www.youtube.com/watch?v=18xPsqYjUhE');
     return (
 <div className="container container--fluid margin-vert--lg">
-        <div className="row">
-        	<div className="col col--9">
+        <div className="row docs-row">
+        	<div className="col col--8">
 			<h1>Documentation (pre-release)</h1>
             <p>bpftrace documentation is divided into three sections. However for earlier bpftrace versions these sections are part of a single document, which are available in the dropdown.</p>
                 <div className="container container--fluid margin-vert--lg">
@@ -40,7 +40,7 @@ function DocsBody() {
                 </div>
                 </div>
           	</div>
-        	<div className="col col--3">
+        	<div className="col col--2">
 			<div class="dropdown dropdown--hoverable">
                 <button class="button button--primary releases-dropdown">pre-release</button>
                 <ul class="dropdown__menu">

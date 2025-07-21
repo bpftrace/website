@@ -11,34 +11,10 @@ import styles from '../index.module.css';
 export default function Home() {
   return (
     <Layout title="docs">
-	    <div className="container docs-container padding-top--md padding-bottom--lg">
-      <div id="docs-header">
-              <h1>Version: 0.21</h1>
-            </div>
+	    <div className="container container--fluid margin-vert--lg">
         <div className="row docs-row">
-        <div className="col col--3">
-            <div className="docs-toc">
-            <ul className="sectlevel1">
-<li><a href="#_synopsis">Synopsis</a></li>
-<li><a href="#_description">Description</a></li>
-<li><a href="#_examples">Examples</a></li>
-<li><a href="#_supported_architectures">Supported architectures</a></li>
-<li><a href="#_options">Options</a></li>
-<li><a href="#_terminology">Terminology</a></li>
-<li><a href="#_program_files">Program Files</a></li>
-<li><a href="#_bpftrace_language">bpftrace Language</a></li>
-<li><a href="#_builtins">Builtins</a></li>
-<li><a href="#_functions">Functions</a></li>
-<li><a href="#_map_functions">Map Functions</a></li>
-<li><a href="#_probes">Probes</a></li>
-<li><a href="#_config_variables">Config Variables</a></li>
-<li><a href="#_environment_variables">Environment Variables</a></li>
-<li><a href="#_options_expanded">Options Expanded</a></li>
-<li><a href="#_advanced_topics">Advanced Topics</a></li>
-</ul>
-            </div>
-          </div>
-          <div className="col docs-left-col">
+          <div className="col docs-left-col col--8">
+          <h1>Documentation (Version: 0.21)</h1>
             <div id="content">
 <div className="sect1">
 <h2 id="_synopsis">Synopsis</h2>
@@ -5462,6 +5438,28 @@ until bpftrace started by the systemd unit has attached its probes.</p>
 </div>
 </div>
           </div>
+          <div className="col col--2">
+          <div className="docs-toc">
+            <ul className="table-of-contents table-of-contents__left-border">
+<li><a href="#_synopsis">Synopsis</a></li>
+<li><a href="#_description">Description</a></li>
+<li><a href="#_examples">Examples</a></li>
+<li><a href="#_supported_architectures">Supported architectures</a></li>
+<li><a href="#_options">Options</a></li>
+<li><a href="#_terminology">Terminology</a></li>
+<li><a href="#_program_files">Program Files</a></li>
+<li><a href="#_bpftrace_language">bpftrace Language</a></li>
+<li><a href="#_builtins">Builtins</a></li>
+<li><a href="#_functions">Functions</a></li>
+<li><a href="#_map_functions">Map Functions</a></li>
+<li><a href="#_probes">Probes</a></li>
+<li><a href="#_config_variables">Config Variables</a></li>
+<li><a href="#_environment_variables">Environment Variables</a></li>
+<li><a href="#_options_expanded">Options Expanded</a></li>
+<li><a href="#_advanced_topics">Advanced Topics</a></li>
+</ul>
+            </div>
+            </div>
         </div>
       </div>
     </Layout>

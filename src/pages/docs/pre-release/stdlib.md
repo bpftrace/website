@@ -1,10 +1,5 @@
 # bpftrace Standard Library (pre-release)
 
-- [Builtins](#builtins)
-- [Functions](#functions)
-- [Map Functions](#map-functions)
-- [Invocation Mode](#invocation-mode)
-
 ## Builtins
 
 Builtins are special variables built into the language.
@@ -13,7 +8,7 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 
 | Variable | Type | BPF Helper | Description |
 | --- | --- | --- | --- |
-| [`$1`, `$2`, `...$n`](./language#positional-parameters) | int64 | n/a | The nth positional parameter passed to the bpftrace program. If less than n parameters are passed this evaluates to `0` in an action block or an empty string in a probe. For string arguments in an action block use the `str()` call to retrieve the value. |
+| [`$1`, `$2`, `...$n`](language#positional-parameters) | int64 | n/a | The nth positional parameter passed to the bpftrace program. If less than n parameters are passed this evaluates to `0` in an action block or an empty string in a probe. For string arguments in an action block use the `str()` call to retrieve the value. |
 | `$#` | int64 | n/a | Total amount of positional parameters passed. |
 | `arg0`, `arg1`, `...argn` | int64 | n/a | nth argument passed to the function being traced. These are extracted from the CPU registers. The amount of args passed in registers depends on the CPU architecture. (kprobes, uprobes, usdt). |
 | `args` | struct args | n/a | The struct of all arguments of the traced function. Available in `rawtracepoint`, `tracepoint`, `fentry`, `fexit`, and `uprobe` (with DWARF) probes. Use `args.x` to access argument `x` or `args` to get a record with all arguments. |
@@ -45,8 +40,6 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 | [`bswap`](#bswap) | Reverse byte order | Sync |
 | [`buf`](#buf) | Returns a hex-formatted string of the data pointed to by d | Sync |
 | [`cat`](#cat) | Print file content | Async |
-| [`pid`](#pid) | Process ID of the current thread | Sync |
-| [`tid`](#tid) | Thread ID of the current thread | Sync |
 | [`cgroupid`](#cgroupid) | Resolve cgroup ID | Compile Time |
 | [`cgroup_path`](#cgroup_path) | Convert cgroup id to cgroup path | Sync |
 | [`exit`](#exit) | Quit bpftrace with an optional exit code | Async |
@@ -64,6 +57,7 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 | [`override`](#override) | Override return value | Sync |
 | [`path`](#path) | Return full path | Sync |
 | [`percpu_kaddr`](#percpu_kaddr) | Resolve percpu kernel symbol name | Sync |
+| [`pid`](#pid) | Process ID of the current thread | Sync |
 | [`print`](#print) | Print a non-map value with default formatting | Async |
 | [`printf`](#printf) | Print formatted | Async |
 | [`pton`](#pton) | Convert text IP address to byte array | Compile Time |
@@ -78,6 +72,7 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 | [`strftime`](#strftime) | Return a formatted timestamp | Async |
 | [`strncmp`](#strncmp) | Compare first n characters of two strings | Sync |
 | [`system`](#system) | Execute shell command | Async |
+| [`tid`](#tid) | Thread ID of the current thread | Sync |
 | [`time`](#time) | Print formatted time | Async |
 | [`uaddr`](#uaddr) | Resolve user-level symbol name | Compile Time |
 | [`uptr`](#uptr) | Annotate as userspace pointer | Sync |
@@ -1225,7 +1220,7 @@ More information on [map printing](./language#map-printing).
 | [`clear`](#clear) | Clear all keys/values from a map. | Async |
 | [`count`](#count) | Count how often this function is called. | Sync |
 | [`delete`](#delete) | Delete a single key from a map. | Sync |
-| [`has_key`](#has_key) | Return true (1) if the key exists in this map. Otherwise return false (0). | Sync |
+| [`has_key`](#has_key) | Return true if the key exists in this map. Otherwise return false. | Sync |
 | [`hist`](#hist) | Create a log2 histogram of n using buckets per power of 2, 0 &lt;= k &lt;= 5, defaults to 0. | Sync |
 | [`len`](#len) | Return the number of elements in a map. | Sync |
 | [`lhist`](#lhist) | Create a linear histogram of n. lhist creates M ((max - min) / step) buckets in the range [min,max) where each bucket is step in size. | Sync |
@@ -1377,7 +1372,7 @@ kprobe:dummy {
 
 **variants**
 
-* `int has_key(map m, mapkey k)`
+* `boolean has_key(map m, mapkey k)`
 
 Return true (1) if the key exists in this map.
 Otherwise return false (0).

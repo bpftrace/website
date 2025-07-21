@@ -11,26 +11,10 @@ import styles from '../../index.module.css';
 export default function Home() {
   return (
     <Layout title="docs">
-	    <div className="container docs-container padding-top--md padding-bottom--lg">
-        <div id="docs-header">
-          <h1>The Command Line Tool (Version: 0.23)</h1>
-        </div>
+	    <div className="container container--fluid margin-vert--lg">
         <div className="row docs-row">
-          <div className="col col--3">
-            <div className="docs-toc">
-              <ul className="sectlevel1">
-<li><a href="#_synopsis">Synopsis</a></li>
-<li><a href="#_description">Description</a></li>
-<li><a href="#_examples">Examples</a></li>
-<li><a href="#_options">Options</a></li>
-<li><a href="#_configuration">Configuration</a></li>
-<li><a href="#_options_expanded">Options Expanded</a></li>
-<li><a href="#_terminology">Terminology</a></li>
-<li><a href="#_program_files">Program Files</a></li>
-</ul>
-            </div>
-          </div>
-          <div className="col docs-left-col">
+          <div className="col docs-left-col col--8">
+          <h1>The Command Line Tool (Version: 0.23)</h1>
             <div id="content">
 <div className="sect1">
 <h2 id="_synopsis">Synopsis</h2>
@@ -331,12 +315,39 @@ Read about how to access <a href="#builtins-positional-parameters">positional</a
 </div>
 </div>
 <div className="sect1">
+<h2 id="_the_language">The Language</h2>
+<div className="sectionbody">
+<div className="paragraph">
+<p>Syntax, types, and concepts for bpftrace are <a href="language">available here</a>.</p>
+</div>
+</div>
+</div>
+<div className="sect1">
+<h2 id="_probes">Probes</h2>
+<div className="sectionbody">
+<div className="paragraph">
+<p>bpftrace supports various probe types which allow the user to attach BPF programs to different types of events.
+Each probe starts with a provider (e.g. <code>kprobe</code>) followed by a colon (<code>:</code>) separated list of options.
+The amount of options and their meaning depend on the provider.
+<a href="language#probes">Full list of probe types</a>.</p>
+</div>
+</div>
+</div>
+<div className="sect1">
+<h2 id="_standard_library">Standard library</h2>
+<div className="sectionbody">
+<div className="paragraph">
+<p>The standard library of all <a href="stdlib#builtins">builtins</a>, <a href="stdlib#functions">functions</a>, and <a href="stdlib#map-functions">map functions</a> is <a href="stdlib">available here</a>.</p>
+</div>
+</div>
+</div>
+<div className="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div className="sectionbody">
 <div className="sect2">
 <h3 id="_config_variables">Config Variables</h3>
 <div className="paragraph">
-<p>Some behavior can only be controlled through config variables, which are <a href="./language#config-variables">listed here</a>.
+<p>Some behavior can only be controlled through config variables, which are <a href="language#config-variables">listed here</a>.
 These can be set via the Config Block directly in a script (before any probes) or via their environment variable equivalent, which is upper case and includes the `BPFTRACE_` prefix e.g. ``stack_mode``'s environment variable would be `BPFTRACE_STACK_MODE`.</p>
 </div>
 
@@ -344,7 +355,7 @@ These can be set via the Config Block directly in a script (before any probes) o
 <div className="sect2">
 <h3 id="_environment_variables">Environment Variables</h3>
 <div className="paragraph">
-<p>These are not available as part of the standard set of <a href="./language#config-variables">Config Variables</a> and can only be set as environment variables.</p>
+<p>These are not available as part of the standard set of <a href="language#config-variables">Config Variables</a> and can only be set as environment variables.</p>
 </div>
 <div className="sect3">
 <h4 id="_bpftrace_btf">BPFTRACE_BTF</h4>
@@ -701,7 +712,24 @@ iscsid is sleeping.`}</pre>
 </div>
 </div>
           </div>
-        </div>
+        <div className="col col--2">
+            <div className="docs-toc">
+              <ul className="table-of-contents table-of-contents__left-border">
+<li><a href="#_synopsis">Synopsis</a></li>
+<li><a href="#_description">Description</a></li>
+<li><a href="#_examples">Examples</a></li>
+<li><a href="#_options">Options</a></li>
+<li><a href="#_the_language">The Language</a></li>
+<li><a href="#_probes">Probes</a></li>
+<li><a href="#_standard_library">Standard library</a></li>
+<li><a href="#_configuration">Configuration</a></li>
+<li><a href="#_options_expanded">Options Expanded</a></li>
+<li><a href="#_terminology">Terminology</a></li>
+<li><a href="#_program_files">Program Files</a></li>
+</ul>
+</div>
+            </div>
+          </div>
       </div>
     </Layout>
   );

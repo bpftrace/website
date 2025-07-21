@@ -1027,7 +1027,7 @@ kprobe:kvm:x86_emulate_insn
 }
 ```
 
-See [BTF Support](./language#btf-support) for more details.
+See [BTF Support](#btf-support) for more details.
 
 `kprobe` s are not limited to function entry, they can be attached to any instruction in a function by specifying an offset from the start of the function.
 

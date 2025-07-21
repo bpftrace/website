@@ -762,7 +762,7 @@ $b = --$a; // a = 9; b = 9
 Note that maps will be implicitly declared and initialized to 0 if not already declared or defined.
 Scratch variables must be initialized before using these operators.
 
-Note `++`/`--` on a shared global variable can lose updates. See [`count()`](./stdlib#count) for more details.
+Note `++`/`--` on a shared global variable can lose updates. See [`count()`](stdlib#count) for more details.
 
 ### Block Expressions
 
@@ -810,7 +810,7 @@ bpftrace supports various probe types which allow the user to attach BPF program
 Each probe starts with a provider (e.g. `kprobe`) followed by a colon (`:`) separated list of options.
 The amount of options and their meaning depend on the provider and are detailed below.
 The valid values for options can depend on the system or binary being traced, e.g. for uprobes it depends on the binary.
-Also see [Listing Probes](./cli#_listing_probes).
+Also see [Listing Probes](cli#listing-probes).
 
 It is possible to associate multiple probes with a single action as long as the action is valid for all specified probes.
 Multiple probes can be specified as a comma (`,`) separated list:
@@ -1113,7 +1113,7 @@ The original names are still supported for backwards compatibility.
 
 ``fentry``/``fexit`` probes make use of BTF type information to derive the type of function arguments at compile time.
 This removes the need for manual type casting and makes the code more resilient against small signature changes in the kernel.
-The function arguments are available in the `args` struct which can be inspected by doing verbose listing (see [Listing Probes](./cli#_listing_probes)).
+The function arguments are available in the `args` struct which can be inspected by doing verbose listing (see [Listing Probes](cli#listing-probes)).
 These arguments are also available in the return probe (`fexit`), unlike `kretprobe`.
 
 The bpf variants (e.g. `fentry:bpf[:prog_id]:prog_name`) allow attaching to running BPF programs and sub-programs.
@@ -1221,7 +1221,7 @@ kprobe:kvm:x86_emulate_insn
 }
 ```
 
-See [BTF Support](./language#btf-support) for more details.
+See [BTF Support](#btf-support) for more details.
 
 `kprobe` s are not limited to function entry, they can be attached to any instruction in a function by specifying an offset from the start of the function.
 
@@ -1291,7 +1291,7 @@ rawtracepoint:vmlinux:kfree_skb {
 `rawtracepoint` probes make use of BTF type information to derive the type of function arguments at compile time.
 This removes the need for manual type casting and makes the code more resilient against small signature changes in the kernel.
 The arguments accessible by a `rawtracepoint` are different from the arguments you can access from the `tracepoint` of the same name.
-The function arguments are available in the `args` struct which can be inspected by doing verbose listing (see [Listing Probes](./cli#_listing_probes)).
+The function arguments are available in the `args` struct which can be inspected by doing verbose listing (see [Listing Probes](cli#listing-probes)).
 
 ### software
 
@@ -1350,7 +1350,7 @@ tracepoint:syscalls:sys_enter_openat {
 }
 ```
 
-Tracepoint arguments are available in the `args` struct which can be inspected with verbose listing, see the [Listing Probes](./cli#_listing_probes) section for more details.
+Tracepoint arguments are available in the `args` struct which can be inspected with verbose listing, see the [Listing Probes](cli#listing-probes) section for more details.
 
 ```
 # bpftrace -lv "tracepoint:*"
@@ -1404,7 +1404,7 @@ a full path. The path will be then automatically resolved using `/etc/ld.so.cach
 uprobe:libc:malloc { printf("Allocated %d bytes\n", arg0); }
 ```
 
-If the traced binary has DWARF included, function arguments are available in the `args` struct which can be inspected with verbose listing, see the [Listing Probes](./cli#_listing_probes) section for more details.
+If the traced binary has DWARF included, function arguments are available in the `args` struct which can be inspected with verbose listing, see the [Listing Probes](cli#listing-probes) section for more details.
 
 ```
 # bpftrace -lv 'uprobe:/bin/bash:rl_set_prompt'
@@ -1843,7 +1843,7 @@ BEGIN { @=*uptr(kaddr("do_poweroff")) }
 ```
 
 bpftrace tries to automatically set the correct address space for a pointer based on the probe type, but might fail in cases where it is unclear.
-The address space can be changed with the [kptrs](./stdlib#kptr) and [uptr](./stdlib#uptr) functions.
+The address space can be changed with the [kptrs](stdlib#kptr) and [uptr](stdlib#uptr) functions.
 
 ### BPF License
 

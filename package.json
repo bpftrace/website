@@ -12,8 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "make-pre-release-docs": "asciidoctor bpftrace/man/adoc/bpftrace.adoc -b html5 -o adoc.html && ./make-doc.js adoc.html",
-    "main-docs-sync": "asciidoctor ${npm_config_adoc} -b html5 -o adoc.html && ./make-doc.js adoc.html"
+    "make-pre-release-docs": "asciidoctor bpftrace/man/adoc/bpftrace.adoc -b html5 -o adoc.html && ./make-doc.js adoc.html"
   },
   "dependencies": {
     "@docusaurus/core": "3.6.3",
