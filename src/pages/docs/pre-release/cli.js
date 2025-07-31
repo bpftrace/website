@@ -249,7 +249,7 @@ Errors are still written to stderr.</p>
 <p>Attach to the process with or filter actions by <em>PID</em>.
 If the process terminates, bpftrace will also terminate.
 When using USDT, uprobes, uretprobes, hardware, software, profile, interval, watchpoint, or asyncwatchpoint probes they will be attached to only this process.
-For all other probes, except BEGIN/END, the pid will act like a predicate to filter out events not from that pid.
+For all other probes, except begin/end, the pid will act like a predicate to filter out events not from that pid.
 For listing uprobes/uretprobes set the target to '*' and the process&#8217;s address space will be searched for the symbols.</p>
 </div>
 </div>
@@ -293,7 +293,7 @@ Positional parameters can be placed before or after a double dash but named para
 </div>
 <div className="listingblock">
 <div className="content">
-<pre>{`# bpftrace -e 'BEGIN { print(($1, $2, getopt("aa", 1), getopt("bb"))); }' p1 -- --aa=20 --bb p2
+<pre>{`# bpftrace -e 'begin { print(($1, $2, getopt("aa", 1), getopt("bb"))); }' p1 -- --aa=20 --bb p2
 
 // (p1, p2, 20, true) is printed`}</pre>
 </div>
@@ -541,7 +541,7 @@ Can be defined multiple times.</p>
 <pre>{`# cat program.bt
 #include <foo.h>
 
-BEGIN { @ = FOO }
+begin { @ = FOO }
 
 # bpftrace program.bt
 

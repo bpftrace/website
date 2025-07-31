@@ -4,7 +4,6 @@
 
 Builtins are special variables built into the language.
 Unlike scratch and map variables they don’t need a `$` or `@` as prefix (except for the positional parameters).
-The 'Kernel' column indicates the minimum kernel version required and the 'BPF Helper' column indicates the raw BPF helper function used for this builtin.
 
 | Variable | Type | BPF Helper | Description |
 | --- | --- | --- | --- |
@@ -42,6 +41,7 @@ The 'Kernel' column indicates the minimum kernel version required and the 'BPF H
 | [`cat`](#cat) | Print file content | Async |
 | [`cgroupid`](#cgroupid) | Resolve cgroup ID | Compile Time |
 | [`cgroup_path`](#cgroup_path) | Convert cgroup id to cgroup path | Sync |
+| [`errorf`](#errorf) | Print a formatted error | Async |
 | [`exit`](#exit) | Quit bpftrace with an optional exit code | Async |
 | [`getopt`](#getopt) | Get named command line option/parameter | Sync |
 | [`join`](#join) | Combine an array of char* into one string and print it | Async |
@@ -215,6 +215,26 @@ BEGIN {
   print($cgroup_path); /* This may print a different path */
   printf("%s %s", $cgroup_path, $cgroup_path); /* This may print two different paths */
 }
+```
+
+### errorf
+
+**variants**
+
+* `void errorf(const string fmt, args...)`
+
+**async**
+
+`errorf()` formats and prints data (similar to [`printf`](#printf)) as an error message with the source location.
+
+```
+BEGIN { errorf("Something bad with args: %d, %s", 10, "arg2"); }
+```
+
+Prints:
+
+```
+EXPECT stdin:1:9-62: ERROR: Something bad with args: 10, arg2
 ```
 
 ### exit
@@ -1205,6 +1225,32 @@ uprobe:/bin/bash:readline
 
 Removes a watchpoint
 
+## Macros
+
+| Name | Description |
+| --- | --- |
+| [`assert`](#assert) | Simple assertion macro that will exit the entire script with an error code if the condition is not met. |
+| [`ppid`](#ppid) | Get the pid of the parent process |
+
+### assert
+Simple assertion macro that will exit the entire script with an error code if the condition is not met.
+
+#### Parameters
+- **$cond**: (bool) The condition to check
+- **$msg**: (string) The message to print if the condition is not met
+
+#### Last Expression
+- **None**
+
+### ppid
+Get the pid of the parent process
+
+#### Parameters
+- **$task**: (struct task_struct *) The current task struct
+
+#### Last Expression
+- **uint32**: The pid of the parent process
+
 ## Map Functions
 
 Map functions are built-in functions who’s return value can only be assigned to maps.
@@ -1283,15 +1329,15 @@ interval:s:10 {
 
 Count how often this function is called.
 
-Using `@=count()` is conceptually similar to `@{plus}{plus}`.
+Using `@=count()` is conceptually similar to `@++`.
 The difference is that the `count()` function uses a map type optimized for
 performance and correctness using cheap, thread-safe writes (PER_CPU). However, sync reads
 can be expensive as bpftrace needs to iterate over all the cpus to collect and
 sum these values.
 
-Note: This differs from "raw" writes (e.g. `@{plus}{plus}`) where multiple writers to a
+Note: This differs from "raw" writes (e.g. `@++`) where multiple writers to a
 shared location might lose updates, as bpftrace does not generate any atomic instructions
-for `{plus}{plus}`.
+for `++`.
 
 Example one:
 ```
