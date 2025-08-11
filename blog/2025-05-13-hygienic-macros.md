@@ -125,8 +125,8 @@ BEGIN {
 Getting back to our scratch variable example. If we modify the code where we don’t pass `$a` in as a parameter and instead try to reference it directly, it won’t be mutated at all e.g.
 
 ```
-macro add_one($x) {
-  $a = 1 + $x;
+macro add_one(x) {
+  $a = 1 + x;
 }
 
 BEGIN {
@@ -137,37 +137,37 @@ BEGIN {
 }
 ```
 
-Here the macro creates a temporary variable which it assigns to the passed in expression (in this case `1 + 2`) and safely changes the variable name $a inside the macro expansion so as not to conflict with any other variables in other scopes e.g.
-
-```
-BEGIN {
-  $a = 1;
-
-  {
-    $_magical_prefix_x = 1 + 2;
-    $_magical_prefix_a = 1 + $_magical_prefix_x;
-  };
-
-  print($a)
-}
-```
+This is because variable names are changed inside of macros automatically to avoid conflict with variables in the outer scope of where they are called.
 
 This safe replacement doesn’t work for maps, however, because maps are globally scoped and also have special behavior (e.g. printed by default at program termination), so something like this will cause an error.
 
 ```
-macro add_one(@a) {
+macro add_one(@b) {
   @a += 1;
 }
-
-BEGIN {
-  @a = 1;
-  add_one(1 + 2);
-}
-
-// ERROR: Unhygienic access to map: @a. Maps must be passed into the macro as arguments.
 ```
 
-You might be asking: what is the point of this restriction on variable and map access. At the moment bpftrace does not have references or the ability to make pointers to scratch variables or maps. Looking again at UDFs, if we were to have an `add_one` function, would variables be passed by reference or copied?
+Getting back to `macro add_one(x)`, you'll also notice the macro argument syntax is a little different here. The macro is taking in an expression instead of a variable or a map, which is represented as a naked identifier `x`. This indicates that the macro will not be mutating any variable or maps passed into the macro. Furthermore whatever expression is passed in as `x` (in this case `1 + 2`) will be evaluated in all the places `x` is used. Because, as opposed to a function, a macro is just expanding text. For example:
+
+```
+macro side_effects(x) {
+  x;
+  x;
+  x;
+}
+
+side_effects({ printf("hi") }) // prints hihihi
+```
+
+A macro author can easily bind an incoming expression to a variable to avoid multiple evaluations, e.g.,
+```
+macro add_one(x) {
+  $x = x;
+  $a = 1 + $x;
+}
+```
+
+You might be asking: what is the point of this restriction on variable and map access. At the moment bpftrace does not (yet) have references or the ability to make pointers to scratch variables or maps. Looking again at UDFs, if we were to have an `add_one` function, would variables be passed by reference or copied?
 
 ```
 function add_one($a) {
@@ -175,7 +175,7 @@ function add_one($a) {
 }
 ```
 
-The language, as it is today, makes this ambiguous. However, for macros, because we’re just doing a text replacement, variables and maps are always passed by reference. The “hygiene” part is to ensure that all interactions with variables and maps outside of the scope of a macro are intentional; foot-gun prevention. Inside of a macro, authors are free to declare and create new variables (but not maps), which never escape the scope of the macro e.g.
+The language, as it is today, makes this ambiguous. However, for macros, because we’re just doing a text replacement, variables and maps are always passed by reference UNLESS the macro signature specifies an expression (remember the naked `x` identifier), in which case the value of the map or variable is used. The hygiene part of hygienic macros is to ensure that all interactions with variables and maps outside of the scope of a macro are intentional; foot-gun prevention. Inside of a macro, authors are free to declare and create new variables (but not maps), which never escape the scope of the macro e.g.
 
 ```
 macro if_gt_zero($x) {
@@ -204,7 +204,7 @@ let $a = {
 // $a is 1
 ```
 
-The variable `$a` is being assigned to the last expression in the block. So for macros, you can think of this a little like an implicit return value. Block expressions create a new scope within the macro itself so users don’t have to add additional curly braces inside their macros. It also allows bpftrace to do safe, temporary variable creation for expressions passed in as arguments (remember the `$_magical_prefix_a` variable).
+The variable `$a` is being assigned to the last expression in the block. So for macros, you can think of this a little like an implicit return value. Block expressions create a new scope within the macro itself so users don’t have to add additional curly braces inside their macros.
 
 bpftrace macros also have the ability to call other macros e.g.
 
