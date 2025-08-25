@@ -146,28 +146,6 @@ tracepoint:syscalls:sys_enter_execve {
 55f683ee2000-55f683ee3000 rw-p 00000000 00:00 0
 ```
 
-### pid
-**variants**
-
-* `uint32 pid([curr_ns|init])`
-
-Returns the process ID of the current thread.
-Defaults to `curr_ns`.
-
-* `pid(curr_ns)` - The process ID as seen from the PID namespace of bpftrace.
-* `pid(init)` - The process ID as seen from the initial PID namespace.
-
-### tid
-**variants**
-
-* `uint32 tid([curr_ns|init])`
-
-Returns the thread ID of the current thread.
-Defaults to `curr_ns`.
-
-* `tid(curr_ns)` - The thread ID as seen from the PID namespace of bpftrace.
-* `tid(init)` - The thread ID as seen from the initial PID namespace.
-
 ### cgroupid
 
 **variants**
