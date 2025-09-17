@@ -24,7 +24,7 @@ jobs:
           git config --local user.email "bpftrace@gmail.com"
           git config --local user.name "GitHub Actions"
           git clone https://github.com/bpftrace/bpftrace.git
-          npm run make-pre-release-docs
+          npm run make-docs
           git add src/pages/docs/pre-release/
           git commit -m 'Sync Pre-release docs from main repo' || true
           git push

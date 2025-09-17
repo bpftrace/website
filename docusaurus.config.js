@@ -147,23 +147,27 @@ const config = {
             type: 'dropdown',
             label: 'Docs',
             position: 'left',
-            to: '/docs/release_023/docs',
+            to: '/docs/release_024/docs',
             items: [
               {
                 label: 'The Language',
-                to: '/docs/release_023/language'
+                to: '/docs/release_024/language'
               },
               {
                 label: 'The Standard Library',
-                to: '/docs/release_023/stdlib'
+                to: '/docs/release_024/stdlib'
               },
               {
                 label: 'The Command Line Tool',
-                to: '/docs/release_023/cli'
+                to: '/docs/release_024/cli'
               },
                {
                 label: 'Pre-release docs',
                 to: '/docs/pre-release/docs'
+              },
+              {
+                label: '0.23 docs',
+                to: '/docs/release_023/docs'
               },
               {
                 label: '0.22 docs',

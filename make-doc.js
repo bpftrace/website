@@ -7,7 +7,7 @@
  * and transforms it into a js file for the bpftrace website's docs section.
  *
  * Usage:
- * `./make-doc.js adoc.html 0.22` - to make docs from version 0.22
+ * `./make-doc.js adoc.html 0.24` - to make docs for version 0.24
  * `./make-doc.js adoc.html` - to make the unreleased/master docs
  */
 
@@ -27,6 +27,7 @@ if (arguments.length < 3) {
 const filePath = arguments[2]
 const hasVersion = arguments.length == 4
 const versionArg = hasVersion ? arguments[3] : "pre-release"
+const versionFolder = hasVersion ? ("release_" + arguments[3].replaceAll(".", "")) : "pre-release"
 const PRE_START = "<pre>";
 const PRE_END = "</pre>";
 const PRE_CURLY_START = "<pre>{`"
@@ -48,7 +49,7 @@ async function processAdoc() {
 	const destinationPath = path.join(
 		__dirname,
 		'/src/pages/docs/',
-		versionArg + '/cli.js');
+		versionFolder + '/cli.js');
 
 	const fileStream = createReadStream(filePath);
 
@@ -157,7 +158,7 @@ async function processMarkdownDoc(filename) {
 	const destinationPath = path.join(
 		__dirname,
 		'/src/pages/docs/',
-		versionArg,
+		versionFolder,
 		'/',
 		filename)
 
@@ -195,6 +196,11 @@ async function processMarkdownDoc(filename) {
 		console.log("Success.");
 		console.log("Wrote: ", destinationPath);
 	});
+}
+
+const folderPath = path.join(__dirname, '/src/pages/docs/', versionFolder);
+if (!fs.existsSync(folderPath)) {
+	fs.mkdirSync(folderPath, { recursive: true });
 }
 
 processAdoc();
