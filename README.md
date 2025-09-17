@@ -34,27 +34,28 @@ The easiest way to deploy changes to the staging site is to use the GitHub comme
 
 ## Updating the Docs
 
-From the bpftrace repo (https://github.com/bpftrace/bpftrace):
 ```bash
-$ asciidoctor man/adoc/bpftrace.adoc -b html5 -o adoc.html
+$ git clone https://github.com/bpftrace/bpftrace.git
+$ npm make-docs
 ```
 
-From this repo:
-```bash
-$ ./make-doc.js PATH/TO/adoc.html
-```
+## Updating the Docs for a New Release
 
-This will update the pre-release docs. To update a different version,
-checkout the specific branch of the main repro and re-run the asciidoctor
-command above then add the version to make-doc command above e.g.
+To update for a specific release version (e.g. 0.24):
 
 ```bash
-$ ./make-doc.js PATH/TO/adoc.html 0.22
+$ git clone https://github.com/bpftrace/bpftrace.git
+$ cd bpftrace
+$ git fetch origin release/0.24.x
+$ git checkout release/0.24.x
+$ cd ..
+$ npm run make-docs 0.24
+$ cp docs/pre-release/docs.js release_024/
 ```
 
-If updating the docs for the latest released version of bpftrace, in addition to
-generating docs for the numbered version as above, you'll need to run the
-command for a second time with the version name "latest":
-```bash
-$ ./make-doc.js PATH/TO/adoc.html latest
-```
+You will also need to update the links and text in the copied docs.js file.
+
+Next:
+1. update the docusaurus.config.js navigation bar links to include the new release docs
+1. remove the "latest" text from the previous release docs.js and update the button dropdown to add the the new release docs to the list
+1. update the button dropdown to add the the new release docs to the list in the pre-release/docs.js file

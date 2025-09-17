@@ -45,6 +45,9 @@ function DocsBody() {
                 <button class="button button--primary releases-dropdown">pre-release</button>
                 <ul class="dropdown__menu">
                     <li>
+                    <a class="dropdown__link" href="../release_024/docs">0.24</a>
+                    </li>
+                    <li>
                     <a class="dropdown__link" href="../release_023/docs">0.23</a>
                     </li>
                     <li>
