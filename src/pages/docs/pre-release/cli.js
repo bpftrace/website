@@ -94,7 +94,7 @@ tracing capabilities.</p>
 <div className="sect2">
 <h3 id="_b_mode"><strong>-B</strong> <em>MODE</em></h3>
 <div className="paragraph">
-<p>Set the buffer mode for stdout.</p>
+<p>Set the output buffer mode (applies to terminal and file output <code>-o</code>).</p>
 </div>
 <div className="dlist">
 <dl>
