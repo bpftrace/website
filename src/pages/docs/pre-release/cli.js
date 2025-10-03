@@ -563,7 +563,7 @@ Headers are included in the order they are defined, and they are included before
 <div className="listingblock">
 <div className="content">
 <pre>{`# bpftrace --include linux/path.h --include linux/dcache.h \
-    -e 'kprobe:vfs_open { printf("open path: %s\\n", str(((struct path *)arg0)->dentry->d_name.name)); }'
+    -e 'kprobe:vfs_open { printf("open path: %s\\n", str(((struct path *)arg0).dentry.d_name.name)); }'
 
 Attached 1 probe
 open path: .com.google.Chrome.ASsbu2
