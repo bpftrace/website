@@ -81,12 +81,29 @@
   border: 2px solid var(--ifm-hero-text-color);
 }
 
+.hero--image {
+  margin-left: -50px;
+  max-width: 600px;
+}
+
+.hero__text {
+  text-align: left;
+}
+
 .hero__subtitle {
   font-weight: bold;
 }
 
+.hero__release a {
+  background-color: transparent;
+  border: 0px;
+  color: var(--ifm-hero-text-color);
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .hero--video {
-  margin-top: calc(var(--ifm-spacing-horizontal) * 6);
+  margin-top: calc(var(--ifm-spacing-horizontal) * 14);
 }
 
 .hero--video video {
