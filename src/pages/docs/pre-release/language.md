@@ -771,23 +771,6 @@ The following relation operators are available for comparing strings, integer ar
 | == | left-hand string equal to right-hand |
 | != | left-hand string not equal to right-hand |
 
-**Note:** Tuple comparison works by comparing each element of both tuples
-with a logical && chain, e.g., the comparison of these two tuples
-```
-$x = ("hello", -6);
-$y = ("bye", -6);
-```
-turns this:
-```
-$x == $y
-```
-into this
-```
-($x.0 == $y.0 && $x.1 == $y.1)
-```
-So if comparing literal tuples that have nested expression with side effects
-they may not execute due to short-circuiting if previous elements are not equal.
-
 ### Assignment Operators
 
 The following assignment operators can be used on both `map` and `scratch` variables:
@@ -1672,25 +1655,20 @@ kprobe:dummy {
 bpftrace has support for immutable N-tuples.
 A tuple is a sequence type (like an array) where, unlike an array, every element can have a different type.
 
-Tuples are a comma separated list of expressions, enclosed in brackets, `(1,2)`.
-Individual fields can be accessed with the `.` operator.
-Tuples are zero indexed like arrays are.
+Tuples are a comma separated list of expressions, enclosed in brackets, `(1,"hello")`.
+Individual fields can be accessed with the `.` operator or via array-style access.
+The array index expression must evaluate to an integer literal at compile time (no variables but this is ok `(1, "hello")[1 - 1]`).
+Tuples are zero indexed like arrays. Examples:
 
 ```
 interval:s:1 {
-  $a = (1,2);
+  $a = (1,"hello");
   $b = (3,4, $a);
-  print($a);
-  print($b);
-  print($b.0);
+  print($a);     // (1, "hello")
+  print($b);     // (3, 4, (1, "hello"))
+  print($b.0);   // 3
+  print($a[1]);  // "hello"
 }
-
-/*
- * Sample output:
- * (1, 2)
- * (3, 4, (1, 2))
- * 3
- */
 ```
 
 Single-element and empty tuples can be specified using Python-like syntax.
