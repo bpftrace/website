@@ -820,6 +820,20 @@ let $a = {
 
 This can be used anywhere an expression can be used.
 
+**Note:** There will be a warning for discarded expressions, e.g.,
+
+```
+{ 1 } // Warning
+$a = { 1 } // No Warning
+has_key(@a, 1); // Warning
+$b = has_key(@a, 1); // No Warning
+```
+The warning can also be silenced by utilizing the Discard Expression:
+
+```
+_ = has_key(@a, 1); // No Warning
+```
+
 ## Preamble
 
 The preamble consists of multiple optional pieces:
@@ -1461,6 +1475,14 @@ a full path. The path will be then automatically resolved using `/etc/ld.so.cach
 
 ```
 uprobe:libc:malloc { printf("Allocated %d bytes\n", arg0); }
+```
+
+If multiple versions of the same shared library exist (e.g. `libssl.so.3` and
+`libssl.so.59`), bpftrace may resolve the wrong one. To fix this, you can specify
+a versioned SONAME to ensure the correct library is traced:
+
+```
+uprobe:libssl.so.3:SSL_write { ... }
 ```
 
 If the traced binary has DWARF included, function arguments are available in the `args` struct which can be inspected with verbose listing, see the [Listing Probes](cli#listing-probes) section for more details.
