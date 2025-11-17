@@ -329,6 +329,7 @@ Read about how to access positional and named parameters <a href="language#comma
 <p>bpftrace supports various probe types which allow the user to attach BPF programs to different types of events.
 Each probe starts with a provider (e.g. <code>kprobe</code>) followed by a colon (<code>:</code>) separated list of options.
 The amount of options and their meaning depend on the provider.
+Optionally, the attachpoint specified can be prefixed by a user-provided name followed by equal sign (e.g. <code>myname=kprobe:&#8230;&#8203;</code>); this is used for certain advanced features and is typically omitted.
 <a href="language#probes">Full list of probe types</a>.</p>
 </div>
 </div>
