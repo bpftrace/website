@@ -3,6 +3,7 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
@@ -155,6 +156,43 @@
 
 .releases-dropdown {
   color: #1c1e21;
+}
+
+/* Playground */
+.playground-code-area,
+.playground-output {
+  width: 96%;
+  height: 200px;
+  padding: 8px;
+  background-color: #dfdfdf;
+  border: 0px;
+  font-size: 1.1rem;
+  overflow-y: scroll;
+  border-radius: 10px;
+  font-family: Roboto Mono, monospace;
+  white-space: pre;
+}
+
+.playground-output {
+  background-color: #18252D;
+  color: #fff;
+}
+
+#playground-run {
+  color: #18252D;
+}
+
+#playground-run:after {
+  content: "\25B6";
+  padding-left: 6px;
+}
+
+#playground-run.running:after {
+  content: "";
+}
+
+.playground-exit-message {
+  display: inline-block;
 }
 
 @media (max-width: 997px) {

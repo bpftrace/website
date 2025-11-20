@@ -122,6 +122,10 @@ const config = {
             position: 'left',
             items: [
               {
+                label: 'Playground',
+                to: '/playground'
+              },
+              {
                 label: 'One-Liners',
                 to: '/one-liners'
               },
