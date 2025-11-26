@@ -432,6 +432,18 @@ interval:s:1 {
 You can find all kernel symbols at `/proc/kallsyms`.
 
 
+### kfunc_allowed
+- `boolean kfunc_allowed(const string kfunc)`
+
+Determine if a kfunc is supported for particular probe types.
+
+
+### kfunc_exist
+- `boolean kfunc_exist(const string kfunc)`
+
+Determine if a kfunc exists using BTF.
+
+
 ### kptr
 - `T * kptr(T * ptr)`
 
@@ -1109,7 +1121,7 @@ This utilizes the BPF helpers `probe_read_str, probe_read_{kernel,user}_str`
 The maximum string length is limited by the `BPFTRACE_MAX_STRLEN` env variable, unless `length` is specified and shorter than the maximum.
 In case the string is longer than the specified length only `length - 1` bytes are copied and a NULL byte is appended at the end.
 
-When available (starting from kernel 5.5, see the `--info` flag) bpftrace will automatically use the `kernel` or `user` variant of `probe_read_{kernel,user}_str` based on the address space of `data`, see [Address-spaces](./language#address-spaces) for more information.
+bpftrace will automatically use the `kernel` or `user` variant of `probe_read_{kernel,user}_str` based on the address space of `data`, see [Address-spaces](./language#address-spaces) for more information.
 
 
 ### strcap
