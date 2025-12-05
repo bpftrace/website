@@ -12,7 +12,7 @@ jordalgo:
   name: Jordan Rome
   title: Software Engineer
   url: https://github.com/jordalgo
-  image_url: https://github.com/joralgo.png
+  image_url: https://avatars.githubusercontent.com/u/1537292?v=4
   page: true
 
 danobi:
@@ -38,9 +38,16 @@ viktormalik:
   url: https://github.com/viktormalik
   image_url: https://github.com/viktormalik.png
   page: true
-  
+
 serxa:
   name: Sergei Trifonov
   title: Principal Software Engineer
   url: https://github.com/serxa
+  page: true
+
+amscanne:
+  name: Adin Scannell
+  title: Software Engineer
+  url: https://github.com/amscanne
+  image_url: https://github.com/amscanne.png
   page: true
