@@ -368,16 +368,6 @@ See src/btf.cpp for the details.</p>
 </div>
 </div>
 <div className="sect3">
-<h4 id="_bpftrace_debug_output">BPFTRACE_DEBUG_OUTPUT</h4>
-<div className="paragraph">
-<p>Default: 0</p>
-</div>
-<div className="paragraph">
-<p>Outputs bpftrace&#8217;s runtime debug messages to the trace_pipe. This feature can be turned on by setting
-the value of this environment variable to <code>1</code>.</p>
-</div>
-</div>
-<div className="sect3">
 <h4 id="_bpftrace_kernel_build">BPFTRACE_KERNEL_BUILD</h4>
 <div className="paragraph">
 <p>Default: <code>/lib/modules/$(uname -r)</code></p>
