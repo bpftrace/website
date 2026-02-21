@@ -236,6 +236,15 @@ For more details see the <a href="#_listing_probes">Listing Probes</a> section.<
 </div>
 </div>
 <div className="sect2">
+<h3 id="_probe_filter_regex"><strong>--probe-filter</strong> <em>REGEX</em></h3>
+<div className="paragraph">
+<p>Only attach and run probes whose name matches the regular expression <em>REGEX</em>.
+Probes that do not match are not loaded into the kernel.
+Special probes (<code>BEGIN</code> and <code>END</code>) are not affected by this filter.
+If no probes match, bpftrace exits with an error.</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_o_filename"><strong>-o</strong> <em>FILENAME</em></h3>
 <div className="paragraph">
 <p>Write bpftrace tracing output to <em>FILENAME</em> instead of stdout.
