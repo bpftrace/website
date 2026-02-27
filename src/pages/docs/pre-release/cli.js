@@ -245,6 +245,15 @@ If no probes match, bpftrace exits with an error.</p>
 </div>
 </div>
 <div className="sect2">
+<h3 id="_traceable_functions_filename"><strong>--traceable-functions</strong> <em>FILENAME</em></h3>
+<div className="paragraph">
+<p>Specify the file containing the list of traceable kernel functions. If not set,
+bpftrace uses <code>/sys/kernel/tracing/available_filter_functions</code>, which depends on
+dynamic ftrace. The format is the same as in <code>available_filter_functions</code>: each
+line is either "symbol" or "symbol [module]".</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_o_filename"><strong>-o</strong> <em>FILENAME</em></h3>
 <div className="paragraph">
 <p>Write bpftrace tracing output to <em>FILENAME</em> instead of stdout.
