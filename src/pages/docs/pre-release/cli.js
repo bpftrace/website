@@ -283,6 +283,10 @@ For listing uprobes/uretprobes set the target to '*' and the process&#8217;s add
 <p>Some calls, like 'system', are marked as unsafe as they can have dangerous side effects ('system("rm -rf")') and are disabled by default.
 This flag allows their use.</p>
 </div>
+<div className="paragraph">
+<p>In addition, it makes kprobe/kretprobe checks less restrictive.
+It can be used to probe functions that bpftrace reports as not traceable, but are supported if the kernel is configured to allow probing notrace functions.</p>
+</div>
 </div>
 <div className="sect2">
 <h3 id="_usdt_file_activation"><strong>--usdt-file-activation</strong></h3>
