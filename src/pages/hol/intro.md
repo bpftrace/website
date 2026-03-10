@@ -4,7 +4,7 @@ This hands-on lab is designed to be completed in half a day though that may vary
 
 We suggest that you complete the labs in the order they are presented below. The sections in each lab generally contain a mix of presented information and suggested exercises. We **strongly** suggest that you manually run any bpftrace scripts that are used in explanations and feel free to modify them and see what happens!
 
-Finally, note that the lab is designed to be ran stand alone and without a lecturer but it is probably at its best when undertook in a shared learning environment (i.e, having people around to discuss your problems and ideas with!). For help later or on your own, please feel free to post any and all bpftrace questions in the [GitHub discussion section](https://github.com/bpftrace/bpftrace/discussions) or in the [bpftrace IRC channel](https://webchat.oftc.net/?nick=&channels=%23bpftrace).
+Finally, note that the lab is designed to be ran stand alone and without a lecturer but it is probably at its best when undertook in a shared learning environment (i.e, having people around to discuss your problems and ideas with!). For help later or on your own, please feel free to post any and all bpftrace questions in the [GitHub discussion section](https://github.com/bpftrace/bpftrace/discussions) or in the [bpftrace Discord server](https://discord.gg/3tnjU2fTWr).
 
 ---
 
