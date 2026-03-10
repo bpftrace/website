@@ -193,8 +193,8 @@ const config = {
                 href: 'https://github.com/bpftrace/bpftrace/discussions',
               },
               {
-                label: 'IRC',
-                href: 'https://webchat.oftc.net/?nick=&channels=%23bpftrace',
+                label: 'Discord',
+                href: 'https://discord.gg/3tnjU2fTWr',
               },
               {
                 label: 'Office Hours',
@@ -230,8 +230,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'IRC',
-                href: 'https://webchat.oftc.net/?nick=&channels=%23bpftrace',
+                label: 'Discord',
+                href: 'https://discord.gg/3tnjU2fTWr',
               },
             ],
           },
