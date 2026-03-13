@@ -50,7 +50,7 @@ $ git fetch origin release/0.24.x
 $ git checkout release/0.24.x
 $ cd ..
 $ npm run make-docs 0.24
-$ cp docs/pre-release/docs.js release_024/
+$ cp src/pages/docs/pre-release/docs.js src/pages/docs/release_024/
 ```
 
 You will also need to update the links and text in the copied docs.js file.
