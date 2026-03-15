@@ -5,9 +5,9 @@ Below are some highlights from this release. For a full list of changes, check o
 
 ## What's New
 
-There are some exiciting new, but unstable, features in this release like [**imports**](blog/imports), [**c-interop**](blog/c-interop), and [**compile time**](blog/comptime) functions. They're marked as "unstable" because we're still polishing/testing the exact API but please feel free to experiment with them and [**give us your feedback**](https://github.com/bpftrace/bpftrace/issues).
+There are some exciting new, but unstable, features in this release like [**imports**](blog/imports), [**c-interop**](blog/c-interop), and [**compile time**](blog/comptime) functions. They're marked as "unstable" because we're still polishing/testing the exact API but please feel free to experiment with them and [**give us your feedback**](https://github.com/bpftrace/bpftrace/issues).
 
-Additionally, there are lot of internal changes to bpftrace that are not noticable on the surface. We've been working hard to clean up a lot of tech debt, especially in regards to the bpftrace compile pipeline, our type system (leaning into BTF), probe expansion, code generation, and our new [**standard library**](docs/release_025/stdlib). In fact there have been **397** commits between version 0.24.2 and 0.25.0 - that's huge!
+Additionally, there are a lot of internal changes to bpftrace that are not noticeable on the surface. We've been working hard to clean up a lot of tech debt, especially in regards to the bpftrace compile pipeline, our type system (leaning into BTF), probe expansion, code generation, and our new [**standard library**](docs/release_025/stdlib). In fact there have been **397** commits between version 0.24.2 and 0.25.0 - that's huge!
 
 ### Records
 
@@ -38,9 +38,9 @@ ustack(build_id)
 This is so users can get the build_id + file offset for stacks instead of just the instruction pointer, which is useful if you want to do symbolication after bpftrace has exited.
 
 ### Standard Library Additions
-- `syscall_name()` to convert system call numbers into names
+- `syscall_name` to convert system call numbers into names
 - `pcomm` to get the name of the process for the passed task or the current task
-- `signal_thread()` to target the current thread
+- `signal_thread` to target the current thread
 - `probetype` to get the current probe type, e.g. "kprobe", "uprobe"
 - `find` to get map value if it exists
 - `uaddr` now supports PIE and dynamic library symbols
