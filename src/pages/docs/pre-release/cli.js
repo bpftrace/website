@@ -163,6 +163,12 @@ it.</p>
 </div>
 </div>
 <div className="sect2">
+<h3 id="_fmt_filename"><strong>--fmt</strong> <em>FILENAME</em></h3>
+<div className="paragraph">
+<p>Output standard format for the bpftrace file <em>FILENAME</em>.</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_h_help"><strong>-h, --help</strong></h3>
 <div className="paragraph">
 <p>Print the help summary.</p>
