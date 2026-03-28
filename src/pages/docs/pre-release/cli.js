@@ -131,6 +131,21 @@ For more details see the <a href="#_debug_output">Debug Output</a> section.</p>
 </div>
 </div>
 <div className="sect2">
+<h3 id="_debuginfo_dir"><strong>--debuginfo</strong> <em>DIR</em></h3>
+<div className="paragraph">
+<p>Add the directory DIR to the search path for DWARF debug information.
+Paths may be absolute or relative to the traced binary&#8217;s location.
+Multiple paths can be specified by separating them with a colon (<code>:</code>), for example <code>--debuginfo=/bin/debug:./debug:..</code>.
+Files found in these paths are validated using the build ID.
+Alternatively, CRC32 checksum validation can be enabled by prefixing a path with <code>+</code>.
+Files that do not match are skipped.
+By default, bpftrace searches standard debug paths or attempts to query available debuginfod servers.</p>
+</div>
+<div className="paragraph">
+<p>Split debuginfo format (<code>.dwo</code>, <code>.dwp</code>) is not yet supported for this option, but continues to work with the default probe binary path.</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_dry_run"><strong>--dry-run</strong></h3>
 <div className="paragraph">
 <p>Terminate execution right after attaching all the probes. Useful for testing
