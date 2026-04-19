@@ -29,8 +29,8 @@ function HomepageHeader() {
             <p><Link to="/tutorial-one-liners" target="_self">Learn</Link> more about bpftrace, check out all the great <Link to="https://github.com/bpftrace/bpftrace/blob/master/tools/README.md" target="_self">tools</Link> built with bpftrace, and please <Link to="https://github.com/bpftrace/bpftrace/blob/master/CONTRIBUTING.md" target="_self">contribute!</Link></p>
             <p><span className="hero__release"><Link to="/release-025-notes" target="_self">Version (0.25) Released!</Link></span>
             <br />Check out all the new features, changes, and fixes in the <Link to="/release-025-notes" target="_self">release notes</Link></p>
-            <p><span className="hero__release"><Link to="/blog/path-to-1.0" target="_self">New Blog Post: The Path to 1.0</Link></span>
-            <br />Read about all the new and exiciting features coming to bpftrace.</p>
+            <p><span className="hero__release"><Link to="/blog/my-type-of-language" target="_self">New Blog Post: My Type of Language</Link></span>
+            <br />Read about bpftrace's type system and how it's recently improved</p>
             </div>
           </div>
           <div class="col col--6">
