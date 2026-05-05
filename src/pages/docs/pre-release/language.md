@@ -1,13 +1,36 @@
 # The bpftrace Language (pre-release)
 
-The `bpftrace` (`bt`) language is inspired by the D language used by `dtrace` and uses the same program structure.
-Each script consists of a [Preamble](#preamble) and one or more [Action Blocks](#action-blocks).
+The `bpftrace` (`bt`) language is inspired by the D language used by `dtrace` and uses a similar program structure.
+Each section is optional but must appear in this order:
+
+1. **[C Definitions](#structs)** — `#include` directives, `#define` macros, and
+   `struct`/`union`/`enum` type definitions. Must come before everything else
+   (aside from a shebang line).
+2. **[Config Block](#config-block) and Imports** — a `config` block and any `import` statements.
+   These can appear in any order relative to each other, but must appear after
+   C definitions and before action blocks, map declarations, and macros.
+3. **[Action Blocks](#action-blocks), [Macros](#macros), and [Map Declarations](#map-declarations)** — the main body of the
+   script. These can appear in any order relative to each other.
+
+For example:
 
 ```
-preamble
+#include <linux/socket.h>
+#define RED "\033[31m"
 
-actionblock1
-actionblock2
+struct S {
+  int x;
+}
+
+config = {
+    stack_mode=perf
+}
+
+let @a = lruhash(100);
+
+macro greet { print("hi"); }
+
+kprobe:do_nanosleep { greet!(); }
 ```
 
 ## Action Blocks
@@ -196,7 +219,7 @@ if (condition) {
 ## Config Block
 
 To improve script portability, you can set bpftrace [Config Variables](#config-variables) via the config block,
-which can only be placed at the top of the script (in the [preamble](#preamble)) before any action blocks.
+which can only be placed at the top of the script before any action blocks, macros, or map declarations.
 
 ```
 config = {
@@ -411,12 +434,19 @@ begin { $x = 1<<16; printf("%d %d\n", (uint16)$x, $x); }
 ```
 
 Integers are by default represented as the smallest possible
-type, e.g. `1` is a `uint8` and `-1` is an `int8`. However integers,
-scratch variables, and map keys/values will be automatically upcast
-when necessary, e.g.
-
+signed type, e.g. `0`, `1`, and `-1` are all `int8`.
+If an integer literal exceeds the largest `int64` then it's a `uint64`.
+Positive integer literals are flexible though.
+For this code:
 ```
-$a = 1; // starts as uint8
+$a = 1;
+$a = (uint64)2;
+```
+`$a` ends up being a `uint64` as bpftrace can determine this statically.
+
+Scratch variables and map keys/values will be automatically upcast when necessary, e.g.
+```
+$a = 1; // starts as int8
 $b = -1000; // starts as int16
 $a = $b; // $a now becomes an int16
 
@@ -719,13 +749,18 @@ The following operators are available for integer arithmetic:
 
 Operations between a signed and an unsigned integer are allowed providing
 bpftrace can statically prove a safe conversion is possible. If safe conversion
-is not guaranteed, the operation is undefined behavior and a corresponding
-warning will be emitted.
+is not guaranteed, the operation is undefined behavior.
 
 If the two operands are different size, the smaller integer is implicitly
 promoted to the size of the larger one. Sign is preserved in the promotion.
 For example, `(uint32)5 + (uint8)3` is converted to `(uint32)5 + (uint32)3`
 which results in `(uint32)8`.
+
+Subtraction (as well as decrement below) always yields a signed integer type
+as this is equivalent to addition with a signed (negative) integer, e.g.
+these two assignments yield the same type (`int64`):
+`$a = (uint64)1 - (uint64)2; $b = (uint64)1 + (-2)`.
+To maintain an unsigned type, cast the result, e.g. `$a = (uint64)((uint64)1 - (uint64)2);`.
 
 Pointers may be used with arithmetic operators but only for addition and
 subtraction. For subtraction, the pointer must appear on the left side of the
@@ -835,41 +870,6 @@ The warning can also be silenced by utilizing the Discard Expression:
 
 ```
 _ = has_key(@a, 1); // No Warning
-```
-
-## Program Structure
-
-A bpftrace script has the following top-level structure, where each section is
-optional but must appear in this order:
-
-1. **Config block and imports** — a `config` block and any `import` statements.
-   These can appear in any order relative to each other, but must come before
-   everything else (aside from a shebang line).
-2. **C definitions** — `#include` directives, `#define` macros, and
-   `struct`/`union`/`enum` type definitions. Must appear after config/imports
-   and before probes, functions, and macros.
-3. **Probes, macros, and map declarations** — the main body of the
-   script. These can appear in any order relative to each other.
-
-For example:
-
-```
-config = {
-    stack_mode=perf
-}
-
-#include <linux/socket.h>
-#define RED "\033[31m"
-
-struct S {
-  int x;
-}
-
-let @a = lruhash(100);
-
-macro greet { print("hi"); }
-
-kprobe:do_nanosleep { greet!(); }
 ```
 
 ## Probes
@@ -1691,7 +1691,7 @@ Fields are accessed with the `.` operator.
 If the `.` is used on a pointer, it is automatically dereferenced.
 The legacy `->` operator may be used, but is purely an alias for the `.` operator.
 
-Custom structs can be defined in the preamble.
+Custom structs can be defined at the top of the program.
 
 Constructing structs from scratch, like `struct X var = {.f1 = 1}` in `C`, is not supported.
 They can only be read into a variable from a pointer.
