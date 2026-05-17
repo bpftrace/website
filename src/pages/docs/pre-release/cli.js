@@ -131,15 +131,15 @@ For more details see the <a href="#_debug_output">Debug Output</a> section.</p>
 </div>
 </div>
 <div className="sect2">
-<h3 id="_debuginfo_dir"><strong>--debuginfo</strong> <em>DIR</em></h3>
+<h3 id="_debuginfo_dirdir"><strong>--debuginfo</strong> <em>DIR[:DIR]</em></h3>
 <div className="paragraph">
 <p>Add the directory DIR to the search path for DWARF debug information.
 Paths may be absolute or relative to the traced binary&#8217;s location.
-Multiple paths can be specified by separating them with a colon (<code>:</code>), for example <code>--debuginfo=/bin/debug:./debug:..</code>.
-Files found in these paths are validated using the build ID.
-Alternatively, CRC32 checksum validation can be enabled by prefixing a path with <code>+</code>.
+Specify multiple paths either by separating them with a colon (<code>:</code>) or by repeating the option,
+e.g. <code>--debuginfo=/bin/debug:./lib/debug:..</code> and <code>--debuginfo=/bin/debug --debuginfo=./lib/debug</code>, respectively.
+Debug files in these paths are matched by build ID when available; prefix a path with <code>+</code> to enable CRC32 validation when needed.
 Files that do not match are skipped.
-By default, bpftrace searches standard debug paths or attempts to query available debuginfod servers.</p>
+By default, bpftrace searches under standard debug paths, including <code>.debug</code> relative to the traced binary and <code>/usr/lib/debug</code>; it may also query available debuginfod servers.</p>
 </div>
 <div className="paragraph">
 <p>Split debuginfo format (<code>.dwo</code>, <code>.dwp</code>) is not yet supported for this option, but continues to work with the default probe binary path.</p>
