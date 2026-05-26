@@ -27,8 +27,8 @@ function HomepageHeader() {
             <p className="hero__subtitle">{siteConfig.tagline}</p>
             <p>bpftrace is a high-level tracing language for Linux and provides a quick and easy way for people to write observability-based <Link to="https://ebpf.io/what-is-ebpf/" target="_self">eBPF</Link> programs, especially those unfamiliar with the complexities of eBPF.</p>
             <p><Link to="/tutorial-one-liners" target="_self">Learn</Link> more about bpftrace, check out all the great <Link to="https://github.com/bpftrace/bpftrace/blob/master/tools/README.md" target="_self">tools</Link> built with bpftrace, and please <Link to="https://github.com/bpftrace/bpftrace/blob/master/CONTRIBUTING.md" target="_self">contribute!</Link></p>
-            <p><span className="hero__release"><Link to="/release-025-notes" target="_self">Version (0.25) Released!</Link></span>
-            <br />Check out all the new features, changes, and fixes in the <Link to="/release-025-notes" target="_self">release notes</Link></p>
+            <p><span className="hero__release"><Link to="/release-026-notes" target="_self">Version (0.26) Released!</Link></span>
+            <br />Check out all the new features, changes, and fixes in the <Link to="/release-026-notes" target="_self">release notes</Link></p>
             <p><span className="hero__release"><Link to="/blog/my-type-of-language" target="_self">New Blog Post: My Type of Language</Link></span>
             <br />Read about bpftrace's type system and how it's recently improved</p>
             </div>
