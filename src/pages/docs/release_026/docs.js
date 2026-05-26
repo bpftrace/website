@@ -18,7 +18,7 @@ function DocsBody() {
 <div className="container container--fluid margin-vert--lg">
         <div className="row docs-row">
         	<div className="col col--8">
-			<h1>Documentation (Version: 0.25)</h1>
+			<h1>Documentation (Version: 0.26 - latest)</h1>
             <p>bpftrace documentation is divided into three sections. However for earlier bpftrace versions these sections are part of a single document, which are available in the dropdown.</p>
                 <div className="container container--fluid margin-vert--lg">
                 <div className="row">
@@ -42,10 +42,10 @@ function DocsBody() {
           	</div>
         	<div className="col col--2">
 			<div class="dropdown dropdown--hoverable">
-                <button class="button button--primary releases-dropdown">0.25</button>
+                <button class="button button--primary releases-dropdown">0.26</button>
                 <ul class="dropdown__menu">
                     <li>
-                    <a class="dropdown__link" href="../release_026/docs">0.26</a>
+                    <a class="dropdown__link" href="../release_025/docs">0.25</a>
                     </li>
                     <li>
                     <a class="dropdown__link" href="../release_024/docs">0.24</a>

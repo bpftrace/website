@@ -48,6 +48,9 @@ function DocsBody() {
                     <a class="dropdown__link" href="../pre-release/docs">pre-release</a>
                     </li>
                     <li>
+                    <a class="dropdown__link" href="../release_026/docs">0.26</a>
+                    </li>
+                    <li>
                     <a class="dropdown__link" href="../release_025/docs">0.25</a>
                     </li>
                     <li>
