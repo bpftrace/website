@@ -4,11 +4,9 @@ Below are some highlights from this release. For a full list of changes, check
 out the release notes on GitHub:
 - [**0.26.0**](https://github.com/bpftrace/bpftrace/releases/tag/v0.26.0)
 
-Note that this release does not adhere with to the traditional [release
-schedule](https://github.com/bpftrace/bpftrace/blob/master/docs/release_process.md#release-cadence),
-the reason mostly being that it features several important bug fixes, which
-would be hard to backport to the previous release branch. Despite being
-primarily about fixes, there is a number of new and exciting features.
+Note that this release does not adhere to the traditional [release
+schedule](https://github.com/bpftrace/bpftrace/blob/master/docs/release_process.md#release-cadence) because it features several important bug fixes that would be hard to backport to the previous release branch. Despite being
+primarily about fixes, there is a number of new and exciting features!
 
 ## What's New
 
@@ -22,9 +20,9 @@ sub-sections describe the most significant features in detail.
 
 In addition to new features, there is a number of internal changes, some of
 which are surfaced to users. The most notable one is a new *recursive-descent
-parser*, which replaced the previous, more traditional, LR parser. The new
+parser*, which replaces the previous, more traditional, LR parser. The new
 parser allows us to define a clearer [structure of bpftrace
-programs](docs/release_026/language) and resolved a lot of ambiguities of the
+programs](docs/release_026/language) and resolve a lot of ambiguities of the
 bpftrace language, mainly related to casts and `typeof`-like expressions (see
 [Cast Parsing](docs/release_026/language#cast-parsing) for details).
 
