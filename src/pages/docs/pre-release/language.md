@@ -6,7 +6,7 @@ Each section is optional but must appear in this order:
 1. **[C Definitions](#structs)** — `#include` directives, `#define` macros, and
    `struct`/`union`/`enum` type definitions. Must come before everything else
    (aside from a shebang line).
-2. **[Config Block](#config-block) and Imports** — a `config` block and any `import` statements.
+2. **[Config Block](#config-block) and [Imports](#imports)** — a `config` block and any `import` statements.
    These can appear in any order relative to each other, but must appear after
    C definitions and before action blocks, map declarations, and macros.
 3. **[Action Blocks](#action-blocks), [Macros](#macros), and [Map Declarations](#map-declarations)** — the main body of the
@@ -395,7 +395,6 @@ Controls whether maps are printed on exit. Set to `false` in order to change the
 
 These are the list of unstable features:
 - `unstable_tseries` - feature flag for time series map type
-- `unstable_addr` - feature flag for address of operator (&)
 - `unstable_dw_ustack` - feature flag for DWARF-based user-space stack unwinding
 
 All of these accept the following options:
@@ -502,6 +501,78 @@ kprobe:vfs_read /comm == "bash"/ {
 ## Floating-point
 
 Floating-point numbers are not supported by BPF and therefore not by bpftrace.
+
+## Imports
+
+Root-level imports allow you to import other files into your script using the `import` statement.
+
+### Syntax
+
+```
+import "<path>";
+```
+
+Import statements must appear after [C definitions](#structs) but before any [action blocks](#action-blocks), [macros](#macros), or [map declarations](#map-declarations).
+
+### Supported file types
+
+| Extension | Description |
+|-----------|-------------|
+| `.bt` | bpftrace script — probes, macros, and map declarations are merged into the importing script |
+| `.h` | C header — type definitions are made available to the importing script |
+| `.bpf.c` | BPF C source — compiled and linked into the BPF program. These are checked by the BPF verifier. |
+
+If a directory is specified instead of a file, all supported files in that directory (non-recursive) are imported.
+
+### Path resolution
+
+The import path is resolved relative to the directory containing the script that has the `import` statement. For example, if `/home/user/script.bt` contains `import "helpers.bt";`, bpftrace looks for `/home/user/helpers.bt`.
+
+As a security measure, bpftrace refuses to import from world-writable directories.
+
+### Examples
+
+Importing a bpftrace script:
+
+```
+// helpers.bt
+macro greet { print("hello"); }
+```
+
+```
+import "helpers.bt";
+
+begin { greet!(); } // prints "hello"
+```
+
+Importing a C file:
+
+```
+// my_c_lib.bpf.c
+int __add_one(int val) { return 1 + val; }
+```
+
+```
+import "my_c_lib.bpf.c";
+
+begin {
+  print(__add_one(1)); // prints 2
+}
+```
+
+Importing a directory of files:
+
+```
+import "my_lib";
+```
+
+This imports all supported files in the `my_lib/` directory.
+
+### Behavior notes
+
+- Each import path is only imported once. Duplicate imports of the same path are silently ignored.
+- Imported `.bt` scripts can themselves contain `import` statements.
+- An imported `.bt` script cannot contain a `config` block. Only one config block is allowed in the root script.
 
 ## Identifiers
 
@@ -674,6 +745,7 @@ A macro's parameter signature specifies how an argument will be used.
 For example `macro test($a, b, @c)` indicates that `$a` needs to be a scratch variable (which might be mutated), that `b` needs to be an expression that will be inserted where ever `b` is used in the macro body, and that `@c` needs to be a map (which might be mutated).
 A valid use of this macro could be `test($x, 1 + 2, @y)`.
 Variables and maps can also be used for ident parameters that expect expressions and would be the same as writing `{ @y }` (Block Expression).
+Note: User-defined macros with the same name and signature as a standard library macro will override the standard library version. However, standard library macros nested inside of other standard library macros will never use the user-defined version of the same signature.
 
 Here are some valid usages of macros:
 
@@ -1726,6 +1798,7 @@ $b = (buffer[256])arg0;   // buffer of 256 bytes
 ### Pointers
 
 Pointers in bpftrace are similar to those found in `C`.
+You can also get the pointer to a bpftrace scratch variable or map using the address-of operator (`&`), e.g. `$a = 1; $b = &$a;`.
 
 ### Structs
 
