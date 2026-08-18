@@ -200,6 +200,10 @@ const config = {
                 label: 'Office Hours',
                 to: 'office-hours'
               },
+              {
+                label: 'Ecosystem',
+                to: '/ecosystem'
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
