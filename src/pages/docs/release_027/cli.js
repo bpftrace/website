@@ -94,7 +94,7 @@ tracing capabilities.</p>
 <div className="sect2">
 <h3 id="_b_mode"><strong>-B</strong> <em>MODE</em></h3>
 <div className="paragraph">
-<p>Set the buffer mode for stdout.</p>
+<p>Set the output buffer mode (applies to terminal and file output <code>-o</code>).</p>
 </div>
 <div className="dlist">
 <dl>
@@ -131,6 +131,21 @@ For more details see the <a href="#_debug_output">Debug Output</a> section.</p>
 </div>
 </div>
 <div className="sect2">
+<h3 id="_debuginfo_dirdir"><strong>--debuginfo</strong> <em>DIR[:DIR]</em></h3>
+<div className="paragraph">
+<p>Add the directory DIR to the search path for DWARF debug information.
+Paths may be absolute or relative to the traced binary&#8217;s location.
+Specify multiple paths either by separating them with a colon (<code>:</code>) or by repeating the option,
+e.g. <code>--debuginfo=/bin/debug:./lib/debug:..</code> and <code>--debuginfo=/bin/debug --debuginfo=./lib/debug</code>, respectively.
+Debug files in these paths are matched by build ID when available; prefix a path with <code>+</code> to enable CRC32 validation when needed.
+Files that do not match are skipped.
+By default, bpftrace searches under standard debug paths, including <code>.debug</code> relative to the traced binary and <code>/usr/lib/debug</code>; it may also query available debuginfod servers.</p>
+</div>
+<div className="paragraph">
+<p>Split debuginfo format (<code>.dwo</code>, <code>.dwp</code>) is not yet supported for this option, but continues to work with the default probe binary path.</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_dry_run"><strong>--dry-run</strong></h3>
 <div className="paragraph">
 <p>Terminate execution right after attaching all the probes. Useful for testing
@@ -160,6 +175,12 @@ it.</p>
 </div>
 <div className="paragraph">
 <p>The JSON output is compatible with NDJSON and JSON Lines, meaning each line of the streamed output is a single blob of valid JSON.</p>
+</div>
+</div>
+<div className="sect2">
+<h3 id="_fmt_filename"><strong>--fmt</strong> <em>FILENAME</em></h3>
+<div className="paragraph">
+<p>Output standard format for the bpftrace file <em>FILENAME</em>.</p>
 </div>
 </div>
 <div className="sect2">
@@ -236,6 +257,24 @@ For more details see the <a href="#_listing_probes">Listing Probes</a> section.<
 </div>
 </div>
 <div className="sect2">
+<h3 id="_probe_filter_regex"><strong>--probe-filter</strong> <em>REGEX</em></h3>
+<div className="paragraph">
+<p>Only attach and run probes whose name matches the regular expression <em>REGEX</em>.
+Probes that do not match are not loaded into the kernel.
+Special probes (<code>BEGIN</code> and <code>END</code>) are not affected by this filter.
+If no probes match, bpftrace exits with an error.</p>
+</div>
+</div>
+<div className="sect2">
+<h3 id="_traceable_functions_filename"><strong>--traceable-functions</strong> <em>FILENAME</em></h3>
+<div className="paragraph">
+<p>Specify the file containing the list of traceable kernel functions. If not set,
+bpftrace uses <code>/sys/kernel/tracing/available_filter_functions</code>, which depends on
+dynamic ftrace. The format is the same as in <code>available_filter_functions</code>: each
+line is either "symbol" or "symbol [module]".</p>
+</div>
+</div>
+<div className="sect2">
 <h3 id="_o_filename"><strong>-o</strong> <em>FILENAME</em></h3>
 <div className="paragraph">
 <p>Write bpftrace tracing output to <em>FILENAME</em> instead of stdout.
@@ -248,7 +287,7 @@ Errors are still written to stderr.</p>
 <div className="paragraph">
 <p>Attach to the process with or filter actions by <em>PID</em>.
 If the process terminates, bpftrace will also terminate.
-When using USDT, uprobes, uretprobes, hardware, software, profile, interval, watchpoint, or asyncwatchpoint probes they will be attached to only this process.
+When using USDT, uprobes, uretprobes, hardware, software, profile, interval, or watchpoint probes they will be attached to only this process.
 For all other probes, except begin/end, the pid will act like a predicate to filter out events not from that pid.
 For listing uprobes/uretprobes set the target to '*' and the process&#8217;s address space will be searched for the symbols.</p>
 </div>
@@ -264,6 +303,10 @@ For listing uprobes/uretprobes set the target to '*' and the process&#8217;s add
 <div className="paragraph">
 <p>Some calls, like 'system', are marked as unsafe as they can have dangerous side effects ('system("rm -rf")') and are disabled by default.
 This flag allows their use.</p>
+</div>
+<div className="paragraph">
+<p>In addition, it makes kprobe/kretprobe checks less restrictive.
+It can be used to probe functions that bpftrace reports as not traceable, but are supported if the kernel is configured to allow probing notrace functions.</p>
 </div>
 </div>
 <div className="sect2">
@@ -329,6 +372,7 @@ Read about how to access positional and named parameters <a href="language#comma
 <p>bpftrace supports various probe types which allow the user to attach BPF programs to different types of events.
 Each probe starts with a provider (e.g. <code>kprobe</code>) followed by a colon (<code>:</code>) separated list of options.
 The amount of options and their meaning depend on the provider.
+Optionally, the attachpoint specified can be prefixed by a user-provided name followed by equal sign (e.g. <code>myname=kprobe:&#8230;&#8203;</code>); this is used for certain advanced features and is typically omitted.
 <a href="language#probes">Full list of probe types</a>.</p>
 </div>
 </div>
@@ -364,16 +408,6 @@ These can be set via the Config Block directly in a script (before any probes) o
 <div className="paragraph">
 <p>The path to a BTF file. By default, bpftrace searches several locations to find a BTF file.
 See src/btf.cpp for the details.</p>
-</div>
-</div>
-<div className="sect3">
-<h4 id="_bpftrace_debug_output">BPFTRACE_DEBUG_OUTPUT</h4>
-<div className="paragraph">
-<p>Default: 0</p>
-</div>
-<div className="paragraph">
-<p>Outputs bpftrace&#8217;s runtime debug messages to the trace_pipe. This feature can be turned on by setting
-the value of this environment variable to <code>1</code>.</p>
 </div>
 </div>
 <div className="sect3">
@@ -513,7 +547,7 @@ uprobe:/bin/bash:rl_set_prompt
     const char *prompt
 
 # bpftrace -lv 'struct css_task_iter'
-struct css_task_iter {
+vmlinux: struct css_task_iter {
         struct cgroup_subsys *ss;
         unsigned int flags;
         struct list_head *cset_pos;
@@ -563,7 +597,7 @@ Headers are included in the order they are defined, and they are included before
 <div className="listingblock">
 <div className="content">
 <pre>{`# bpftrace --include linux/path.h --include linux/dcache.h \
-    -e 'kprobe:vfs_open { printf("open path: %s\\n", str(((struct path *)arg0)->dentry->d_name.name)); }'
+    -e 'kprobe:vfs_open { printf("open path: %s\\n", str(((struct path *)arg0).dentry.d_name.name)); }'
 
 Attached 1 probe
 open path: .com.google.Chrome.ASsbu2
