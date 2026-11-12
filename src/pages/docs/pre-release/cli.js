@@ -523,7 +523,8 @@ combined with <code>-e</code> or filename args to see all the probes that a prog
 # bpftrace -l 'k:*socket*,tracepoint:syscalls:*tcp*'
 # bpftrace -l -e 'tracepoint:xdp:mem_* { exit(); }'
 # bpftrace -l my_script.bt
-# bpftrace -lv 'enum cpu_usage_stat'`}</pre>
+# bpftrace -lv 'enum cpu_usage_stat'
+# bpftrace -l 'kprobe@fs/open.c:1077'`}</pre>
 </div>
 </div>
 <div className="paragraph">
