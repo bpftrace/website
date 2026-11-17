@@ -26,7 +26,7 @@ config = {
   stack_mode = perf;
 }
 
-let @a = lruhash(100);
+let @a = lruhash(max_entries=100);
 
 macro greet() { print("hi"); }
 
@@ -2195,13 +2195,10 @@ The data type of a variable is automatically determined during first assignment 
 
 ### Map Declarations
 
-***Warning*** this feature is experimental and may be subject to changes.
-Stabilization is tracked in [#4077](https://github.com/bpftrace/bpftrace/issues/4077).
-
 Maps can also be declared in the global scope, before probes and after the config e.g.
 ```bpftrace
-let @a = hash(100);
-let @b = percpulruhash(20);
+let @a = hash(max_entries=100);
+let @b = percpulruhash(max_entries=20);
 
 begin { ... }
 ```
@@ -2213,7 +2210,11 @@ Currently these are available in bpftrace:
 - percpuhash (BPF_MAP_TYPE_PERCPU_HASH)
 - percpulruhash (BPF_MAP_TYPE_LRU_PERCPU_HASH)
 
-Additionally, map declarations must supply a single argument: ***max entries*** e.g. `let @a = lruhash(100);`
+Map declarations accept the following named arguments:
+- `max_entries` (required): the maximum number of entries the map can hold e.g. `let @a = lruhash(max_entries=100);`
+- `no_prealloc` (optional, default `false`): when `true`, map elements are allocated on demand instead of all being preallocated when the map is created (`BPF_F_NO_PREALLOC`). This saves memory for large maps that are rarely full, at the cost of slower updates. Only supported for `hash` and `percpuhash` e.g. `let @a = hash(max_entries=100000, no_prealloc=true);`
+
+As a shorthand, `max_entries` can also be passed as a single positional argument e.g. `let @a = lruhash(100);`
 All maps that are not declared in the global scope utilize the default set in the config variable "max_map_keys".
 However, it’s best practice to declare maps up front as using the default can lead to lost map update events (if the map is full) or over allocation of memory if the map is intended to only store a few entries.
 
